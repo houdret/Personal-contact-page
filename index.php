@@ -9,7 +9,23 @@
     <title>How Contact Me!</title>
 </head>
 <body>
+    
     <div class="container mt-5">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Accueil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contacts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Blog</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled">Disabled</a>
+            </li>
+        </ul>
+        <h1>Formulaire</h1>
         <div class="col-12 ">        
             <img src="./asset/img/moi.png" alt="moi" class="rounded float-end p-2" widht="75px" height="75px" >   
         </div>
@@ -127,6 +143,11 @@
             }
         }
         ?>
+        <footer>
+            <p>Mail: jeanhoudret@gmail.com</p>
+            <p>github: https://github.com/houdret</p>
+            <p>linkedin: https://www.linkedin.com/in/jean-louis-houdret-88250255/ </p>
+        </footer> 
     </div>
 </body>
 </html>
