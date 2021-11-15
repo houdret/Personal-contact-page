@@ -10,9 +10,8 @@
 </head>
 <body>
     <div class="container mt-5">
-    <div class="col-12 ">        
-            <img src="./asset/img/moi.png" alt="moi" class="rounded float-end p-2" srcset="moi.png 30w 30h, moi.png 50w 200h"
-            sizes="(max-width: 200px) 200px, 5vw" >
+        <div class="col-12 ">        
+            <img src="./asset/img/moi.png" alt="moi" class="rounded float-end p-2" widht="75px" height="75px" >   
         </div>
         <form action="" method="post" class=" was-validated row g-1 ">
             <label for="firstname" class="form-label">Firstname </label> 
@@ -20,13 +19,18 @@
             <label for="lastname" class="form-label">Lastname </label> 
             <input type="text" name="lastname" class="form-control is-valid" required>            
             <label for="gender" class="form-label">Gender </label> 
-            <input type="gender" class="form-control is-valid" required>            
+            <input type="text" name="gender" class="form-control is-valid" required>            
             <label for="email" class="form-label">Email </label> 
             <input type="email" name="email" class="form-control is-valid" required>
             <label for="company" class="form-label">Company </label> 
             <input type="text" name="company" class="form-control is-valid" required>
             <label for="subject" class="form-label" >Subject </label> 
-            <input type="text" name="subject" class="form-control" required>
+            <select class="form-select" name="subject"  aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="1">Job</option>
+                <option value="2">Internship</option>
+                <option value="3">Other</option>
+                </select>
             <div class="mb-3">
                 <label for="message" class="form-label">Message </label> 
                 <textarea class="form-control is-invalid" rows="5" cols="40" placeholder="Required example textarea" name="message" required></textarea>
@@ -42,7 +46,7 @@
         error_reporting(E_ALL ^ E_WARNING);
 
         if (isset($_POST['submit'])) {
-                       
+            $errors = array();           
             $firstname = filter_var($_POST['firstname'], FILTER_SANITIZE_STRING);
             $lastname = filter_var($_POST['lastname'], FILTER_SANITIZE_STRING);
             $gender = filter_var($_POST['gender'],FILTER_SANITIZE_STRING);
@@ -56,7 +60,7 @@
             } else {
                 echo 'votre prénom est bien nettoyé et est considérée comme valide.<hr>';
             }
-            if (false === filter_var($firstname, FILTER_SANITIZE_STRING)) {
+            if (false === filter_var($lastname, FILTER_SANITIZE_STRING)) {
                 $errors['lastname'] = 'This lastname is invalid.';
             } else {
                 echo 'votre nom est bien nettoyé et est considérée comme valide.<hr>';
@@ -64,7 +68,7 @@
             if (false === filter_var($gender, FILTER_SANITIZE_STRING)) {
                 $errors['gender'] = 'This gender is invalid.';
             } else {
-                echo 'votre genre est bien nettoyé et est considérée comme valide.<hr>';
+                echo 'votre genre est bien nettoyé et est considérée comme valide.<hr>';                
             }
             if (false === filter_var($email, FILTER_SANITIZE_EMAIL)) {
                 $errors['email'] = 'This email is invalid.';
@@ -87,14 +91,14 @@
                 echo 'votre message est bien nettoyé et est considérée comme valide.<hr>';
             }
             
-            if (false === filter_var($email, FILTER_VALIDATE_STRING)) {
+            if (false === filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $errors['email'] = 'This address is invalid.';
             } else {
                 echo 'Cette adresse email est considérée comme valide.<hr>';
             }
 
             
-            if (count($errors)> 1){
+            if (count($errors) > 0){
                 echo "There are mistakes!";
                 print_r($errors);
                 exit;
