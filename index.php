@@ -144,9 +144,9 @@
         }
         ?>
         <footer>
-            <p>Mail: jeanhoudret@gmail.com</p>
-            <p>github: https://github.com/houdret</p>
-            <p>linkedin: https://www.linkedin.com/in/jean-louis-houdret-88250255/ </p>
+            <a href="jeanhoudret@gmail.com"><img src="./asset/img/gmail.png" width="30px" height="30px" alt="gmail"></a>
+            <a href="https://github.com/houdret"><img src="./asset/img/github.png" width="45px" height="45px" alt="github"></a>
+            <a href="https://www.linkedin.com/in/jean-louis-houdret-88250255/"><img src="./asset/img/In.png" width="30px" height="30px" alt="In"></a>
         </footer> 
     </div>
 </body>
