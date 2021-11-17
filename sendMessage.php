@@ -28,7 +28,7 @@
             $mail->Username   = 'apikey';                     //SMTP username
             $mail->Password   = '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';                               //SMTP password
             $mail->SMTPSecure = 25;            //Enable implicit TLS encryption
-            $mail->Port       = 2525;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+            $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
             //Recipients
             $mail->setFrom('jeanhoudret@gmail.com', 'Mailer');
