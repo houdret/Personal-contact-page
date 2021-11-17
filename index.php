@@ -1,3 +1,8 @@
+<?php
+include_once('sendMessage.php');
+$sujet = 'Validation de votre compte';
+$object = 'Heureux que vous soyez inscrit sur notre site  {$firstname}';
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -59,8 +64,6 @@
             </div> 
         </form>
         <?php
-        error_reporting(E_ALL ^ E_WARNING);
-
         if (isset($_POST['submit'])) {
             $errors = array();           
             $firstname = filter_var($_POST['firstname'], FILTER_SANITIZE_STRING);
@@ -72,54 +75,54 @@
             $commentaire = filter_var($_POST['message'],FILTER_SANITIZE_STRING);
 
             if (false === filter_var($firstname, FILTER_SANITIZE_STRING)) {
-                $errors['firstname'] = 'This firstname is invalid.';
+                $errors['firstname'] = '<div class="alert alert-danger" role="alert">This firstname is invalid.</div>';
             } else {
-                echo 'votre prénom est bien nettoyé et est considérée comme valide.<hr>';
+                echo '<div class="alert alert-success" role="alert">votre prénom est bien nettoyé et est considérée comme valide.</div>';
             }
             if (false === filter_var($lastname, FILTER_SANITIZE_STRING)) {
-                $errors['lastname'] = 'This lastname is invalid.';
+                $errors['lastname'] = '<div class="alert alert-danger" role="alert">This lastname is invalid.</div>';
             } else {
-                echo 'votre nom est bien nettoyé et est considérée comme valide.<hr>';
+                echo '<div class="alert alert-success" role="alert">votre nom est bien nettoyé et est considérée comme valide.</div>';
             }
             if (false === filter_var($gender, FILTER_SANITIZE_STRING)) {
-                $errors['gender'] = 'This gender is invalid.';
+                $errors['gender'] = '<div class="alert alert-danger" role="alert">This gender is invalid.</div>';
             } else {
-                echo 'votre genre est bien nettoyé et est considérée comme valide.<hr>';                
+                echo '<div class="alert alert-success" role="alert">votre genre est bien nettoyé et est considérée comme valide.</div>';                
             }
             if (false === filter_var($email, FILTER_SANITIZE_EMAIL)) {
-                $errors['email'] = 'This email is invalid.';
+                $errors['email'] = '<div class="alert alert-danger" role="alert">This email is invalid.</div>';
             } else {
-                echo 'votre email est bien nettoyé et est considérée comme valide.<hr>';
+                echo '<div class="alert alert-success" role="alert">votre email est bien nettoyé et est considérée comme valide.</div>';
             }
             if (false === filter_var($company, FILTER_SANITIZE_STRING)) {
-                $errors['company'] = 'This company is invalid.';
+                $errors['company'] = '<div class="alert alert-danger" role="alert">This company is invalid.</div>';
             } else {
-                echo 'votre compagnie est bien nettoyé et est considérée comme valide.<hr>';
+                echo '<div class="alert alert-success" role="alert">votre compagnie est bien nettoyé et est considérée comme valide.</div>';
             }
             if (false === filter_var($subject, FILTER_SANITIZE_STRING)) {
-                $errors['subject'] = 'This subject is invalid.';
+                $errors['subject'] = '<div class="alert alert-danger" role="alert">This subject is invalid.</div>';
             } else {
-                echo 'votre subjet est bien nettoyé et est considérée comme valide.<hr>';
+                echo '<div class="alert alert-success" role="alert">votre subjet est bien nettoyé et est considérée comme valide.</div>';
             }
-            if (false === filter_var($message, FILTER_SANITIZE_STRING)) {
-                $errors['message'] = 'This message is invalid.';
+            if (false === filter_var($commentaire, FILTER_SANITIZE_STRING)) {
+                $errors['message'] = '<div class="alert alert-danger" role="alert">This message is invalid.</div>';
             } else {
-                echo 'votre message est bien nettoyé et est considérée comme valide.<hr>';
+                echo '<div class="alert alert-success" role="alert">votre message est bien nettoyé et est considérée comme valide.</div>';
             }
             
             if (false === filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $errors['email'] = 'This address is invalid.';
+                $errors['email'] = '<div class="alert alert-danger" role="alert">This address is invalid.</div>';
             } else {
-                echo 'Cette adresse email est considérée comme valide.<hr>';
+                echo '<div class="alert alert-success" role="alert">Cette adresse email est considérée comme valide.</div>';
             }
 
             
             if (count($errors) > 0){
-                echo "There are mistakes!";
+                echo "<div class='alert alert-danger' role='alert'>There are mistakes!</div>";
                 print_r($errors);
                 exit;
             }else {
-                echo 'Bravo vos données ont été bien encodées <hr>';
+                echo '<div class="alert alert-success" role="alert">Bravo vos données ont été bien encodées </div>';
             }
             
             $data = [
@@ -137,16 +140,18 @@
                 'INSERT INTO portfolio (firstname, lastname, gender, email, company, subject, message ) VALUES (:firstname,:lastname,:gender,:email,:company,:subject,:message)';
             $bdd->prepare($insertion)->execute($data);
 
-            // 4. Display the response interface.
+            
             if ($bdd == true) {
-                echo 'les données ont bien été enregistrées!<hr>';
+                echo '<div class="alert alert-success" role="alert">les données ont bien été enregistrées!</div>';
             }
+            sendMail($sujet, $object, $email, $lastname);
+
         }
         ?>
         <footer>
-            <a href="jeanhoudret@gmail.com"><img src="./asset/img/gmail.png" width="30px" height="30px" alt="gmail"></a>
-            <a href="https://github.com/houdret"><img src="./asset/img/github.png" width="45px" height="45px" alt="github"></a>
-            <a href="https://www.linkedin.com/in/jean-louis-houdret-88250255/"><img src="./asset/img/In.png" width="30px" height="30px" alt="In"></a>
+            <a href="mailto:jeanhoudret@gmail.com?subject=Mail pour me contacter"><img src="./asset/img/gmail.png" width="30px" height="30px" alt="gmail"></a>
+            <a href="mailto:github.com/houdret"><img src="./asset/img/github.png" width="45px" height="45px" alt="github"></a>
+            <a href="mailto:www.linkedin.com/in/jean-louis-houdret-88250255/"><img src="./asset/img/In.png" width="30px" height="30px" alt="In"></a>
         </footer> 
     </div>
 </body>
