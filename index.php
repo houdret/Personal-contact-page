@@ -1,8 +1,12 @@
 <?php
+
 include_once('sendMessage.php');
+error_reporting(E_ALL ^ E_WARNING);
 $sujet = 'Validation de votre compte';
-$object = 'Heureux que vous soyez inscrit sur notre site  {$firstname}';
+$object = 'Heureux que vous soyez inscrit sur notre site'.$firstname;
+
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -58,7 +62,7 @@ $object = 'Heureux que vous soyez inscrit sur notre site  {$firstname}';
                 <div class="invalid-feedback">
                     Please enter a message in the textarea.
                 </div>
-            </div>            
+            </div>                  
             <div class="col-12">
                 <button type="submit" name="submit" class="btn btn-primary mb-3">Valider</button>
             </div> 
@@ -95,7 +99,7 @@ $object = 'Heureux que vous soyez inscrit sur notre site  {$firstname}';
                 echo '<div class="alert alert-success" role="alert">votre email est bien nettoyé et est considérée comme valide.</div>';
             }
             if (false === filter_var($company, FILTER_SANITIZE_STRING)) {
-                $errors['company'] = '<div class="alert alert-danger" role="alert">This company is invalid.</div>';
+                $errors['company'] = '<div class="alert alert-danger " role="alert">This company is invalid.</div>';
             } else {
                 echo '<div class="alert alert-success" role="alert">votre compagnie est bien nettoyé et est considérée comme valide.</div>';
             }
@@ -114,8 +118,7 @@ $object = 'Heureux que vous soyez inscrit sur notre site  {$firstname}';
                 $errors['email'] = '<div class="alert alert-danger" role="alert">This address is invalid.</div>';
             } else {
                 echo '<div class="alert alert-success" role="alert">Cette adresse email est considérée comme valide.</div>';
-            }
-
+            }            
             
             if (count($errors) > 0){
                 echo "<div class='alert alert-danger' role='alert'>There are mistakes!</div>";
@@ -142,10 +145,33 @@ $object = 'Heureux que vous soyez inscrit sur notre site  {$firstname}';
 
             
             if ($bdd == true) {
-                echo '<div class="alert alert-success" role="alert">les données ont bien été enregistrées!</div>';
+                echo '<div class="alert alert-success" role="alert">les données ont bien été enregistrées! </div>';
             }
+            //envois avec phpmailer problème
             sendMail($sujet, $object, $email, $lastname);
+            //envois avec sendmail
+            if(isset($_POST['email'])){
 
+                $header="MIME-Version: 1.0\r\n";
+                $header.='From:"houdret-portfolio-web-dev.me"<houdret-portfolio-web-dev.me>'."\n";
+                $header.='Content-Type:text/html; charset="UTF-8"'."\n";
+                $header.='Content-Transfer-Encoding: 8bit';
+
+                $msg='
+                <html>
+                    <body>
+                        <div align="left">   
+                            Vous êtes le bien venu sur mon site<br/> 
+                            Votre validation est bien enregistrée ' .$firstname.', '.$lastname.                        
+                            
+                        '</div>
+                    </body>
+                </html>
+                ';
+
+                mail($email, "Validation formulaire", $msg, $header);
+
+            }
         }
         ?>
         <footer>

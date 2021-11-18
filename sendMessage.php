@@ -6,6 +6,7 @@
     require './PHPMailer/src/Exception.php';
     require './PHPMailer/src/PHPMailer.php';
     require './PHPMailer/src/SMTP.php';
+    require 'vendor/autoload.php';
 
     
 
@@ -15,23 +16,19 @@
         $mail = new PHPMailer(true);
         
         try {
-
-
-
-            
             //Server settings
             //$mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
             $mail->SMTPDebug = 2;                                       //test
             $mail->isSMTP();                                            //Send using SMTP
-            $mail->Host       = 'smtp.sendgrid.net';                     //Set the SMTP server to send through
+            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
             $mail->SMTPAuth   = true; 
-            $mail->Username   = 'apikey';                     //SMTP username
-            $mail->Password   = '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';                               //SMTP password
+            $mail->Username   = 'jeanhoudret@gmail.com';                     //SMTP username
+            $mail->Password   = 'Jilou2020';                               //SMTP password
             $mail->SMTPSecure = 25;            //Enable implicit TLS encryption
             $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
             //Recipients
-            $mail->setFrom('jeanhoudret@gmail.com', 'Mailer');
+            $mail->setFrom('houdret@houdret-portfolio-web-dev.me', 'Mailer');
             $mail->addAddress($adr, $name);     //Add a recipient
             
 
