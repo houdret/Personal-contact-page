@@ -1,9 +1,6 @@
 <?php
 
 include_once('sendMessage.php');
-error_reporting(E_ALL ^ E_WARNING);
-$sujet = 'Validation de votre compte';
-$object = 'Heureux que vous soyez inscrit sur notre site'.$firstname;
 
 ?>
 
@@ -127,8 +124,11 @@ $object = 'Heureux que vous soyez inscrit sur notre site'.$firstname;
             }else {
                 echo '<div class="alert alert-success" role="alert">Bravo vos données ont été bien encodées </div>';
             }
-            
-            $data = [
+            error_reporting(E_ALL ^ E_WARNING);
+            $sujet = 'Validation de votre compte';
+            $object = 'Heureux que vous soyez inscrit sur notre site'.$firstname;
+
+            /* $data = [
                 'firstname' => $_POST['firstname'],
                 'lastname' => $_POST['lastname'],
                 'gender' => ($_POST['gender']),
@@ -146,32 +146,10 @@ $object = 'Heureux que vous soyez inscrit sur notre site'.$firstname;
             
             if ($bdd == true) {
                 echo '<div class="alert alert-success" role="alert">les données ont bien été enregistrées! </div>';
-            }
+            } */
             //envois avec phpmailer problème
             sendMail($sujet, $object, $email, $lastname);
-            //envois avec sendmail
-            if(isset($_POST['email'])){
-
-                $header="MIME-Version: 1.0\r\n";
-                $header.='From:"houdret-portfolio-web-dev.me"<houdret-portfolio-web-dev.me>'."\n";
-                $header.='Content-Type:text/html; charset="UTF-8"'."\n";
-                $header.='Content-Transfer-Encoding: 8bit';
-
-                $msg='
-                <html>
-                    <body>
-                        <div align="left">   
-                            Vous êtes le bien venu sur mon site<br/> 
-                            Votre validation est bien enregistrée ' .$firstname.', '.$lastname.                        
-                            
-                        '</div>
-                    </body>
-                </html>
-                ';
-
-                mail($email, "Validation formulaire", $msg, $header);
-
-            }
+            
         }
         ?>
         <footer>

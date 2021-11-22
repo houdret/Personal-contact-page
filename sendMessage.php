@@ -1,34 +1,30 @@
 <?php
-    
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
-    
-    require './PHPMailer/src/Exception.php';
-    require './PHPMailer/src/PHPMailer.php';
-    require './PHPMailer/src/SMTP.php';
-    require 'vendor/autoload.php';
-
-    
+    require '../PHPMailer/src/Exception.php';
+    require '../PHPMailer/src/PHPMailer.php';
+    require '../PHPMailer/src/SMTP.php';
+    require '../vendor/autoload.php';  
 
     function sendMail($s, $m, $adr, $name)
     {
-                    
         $mail = new PHPMailer(true);
         
         try {
             //Server settings
             //$mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-            $mail->SMTPDebug = 2;                                       //test
-            $mail->isSMTP();                                            //Send using SMTP
+            //$mail->SMTPDebug  = 2;                                       //test
+            $mail->isSMTP();  
+            $mail->CharSet    = 'UTF-8';                                          //Send using SMTP
             $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
             $mail->SMTPAuth   = true; 
             $mail->Username   = 'jeanhoudret@gmail.com';                     //SMTP username
-            $mail->Password   = 'Jilou2020';                               //SMTP password
-            $mail->SMTPSecure = 25;            //Enable implicit TLS encryption
+            $mail->Password   = 'jcogslpaldapqaql';                              //SMTP password
+            $mail->SMTPSecure = 'TLS';            //Enable implicit TLS encryption
             $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
             //Recipients
-            $mail->setFrom('houdret@houdret-portfolio-web-dev.me', 'Mailer');
+            $mail->setFrom('jeanhoudret@gmail.com');
             $mail->addAddress($adr, $name);     //Add a recipient
             
 
@@ -45,4 +41,4 @@
         };                     
                     
     }
-?>
+?> 
