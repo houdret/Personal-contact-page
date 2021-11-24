@@ -1,5 +1,5 @@
 # Personal-contact-page
-Lien vers Heruko : "https://git.heroku.com/personal-contact-page1.git"
+Lien vers Mon site : "https://houdret-web-dev.000webhostapp.com/"
 
 # Mock-up creation :
 |<img src="asset/img/pc.png" alt="pc">|<img src="asset\img\phone.png" alt="phone" width="380px" height="650px">|
@@ -9,3 +9,5 @@ création en HTML d'un Form avec champ à remplir obligatoirement avec en premie
 
 # création de la base de données
 création d'une table de donnnée avec mySQL sous xampp , utilisation de PDO 
+# utilisation de PHPMailer et Mail
+envois et reception de mail du nouveau utilisateur via le formulaire
